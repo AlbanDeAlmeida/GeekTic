@@ -1,5 +1,6 @@
 package com.cardoso.geektic;
 
+
 public class Geek {
 
 	/*Propriétés de l'objet Geek*/
@@ -8,6 +9,5 @@ public class Geek {
 	private String prenom;
 	private String sexe;
 	private String adresseMail;
-	private int nbVues;
 	
 }

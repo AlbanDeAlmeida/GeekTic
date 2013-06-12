@@ -1,5 +1,7 @@
 package com.cardoso.geektic;
 
+import java.util.Properties;
+
 import javax.sql.DataSource;
 
 import org.hibernate.ejb.HibernatePersistence;
@@ -29,7 +31,7 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
  * @author Alban De Almeida Cardoso
  */
 @Configuration
-@ComponentScan("com.cardoso")
+@ComponentScan("com.cardoso.geektic")
 @EnableWebMvc
 @EnableTransactionManagement
 public class AppConfig extends WebMvcConfigurerAdapter {
@@ -82,6 +84,10 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource result = new DriverManagerDataSource("jdbc:hsqldb:hsql://localhost/GeekTic", "sa", "");
+        Properties properties = result.getConnectionProperties();
+        if(properties==null) properties = new Properties();
+        properties.put("hibernate.dialect", "net.sf.hibernate.dialect.HSQLDialect");
+        result.setConnectionProperties(properties);
         result.setDriverClassName(org.hsqldb.jdbc.JDBCDriver.class.getName());
         return result;
     }
